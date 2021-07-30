@@ -44,10 +44,35 @@ const buildNav = () => {
     })
 }
 
+function isInViewport(el) {
+    var rect = el.getBoundingClientRect();
+
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && 
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth) 
+    );
+}
+
 // Add class 'active' to section when near top of viewport
 
+document.addEventListener('scroll', () => {
+    // iterate over sections
+    sections.forEach((section) => {
+        if(isInViewport(section)){
+            section.className = 'active';
+        } else {
+            section.className = '';
+        }
+    })
+
+}, {
+    passive: true
+});
 
 // Scroll to anchor ID using scrollTO event
+
 
 
 /**

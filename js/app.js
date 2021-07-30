@@ -39,6 +39,7 @@ const buildNav = () => {
     sections.forEach(section => {
         let li = document.createElement('li');
         li.className ='menu__link';
+        li.id = `nav_${section.id}`;
         li.innerHTML =`<a href="#${section.id}">${section.dataset.nav}</a>`;
         navlist.appendChild(li);
     })
@@ -60,9 +61,12 @@ function isInViewport(el) {
 document.addEventListener('scroll', () => {
     // iterate over sections
     sections.forEach((section) => {
+        let navItem = document.getElementById(`nav_${section.id}`);
         if(isInViewport(section)){
+            navItem.classList.add('active');
             section.className = 'active';
         } else {
+            navItem.classList.remove('active');
             section.className = '';
         }
     })
